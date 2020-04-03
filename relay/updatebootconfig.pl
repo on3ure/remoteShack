@@ -12,7 +12,7 @@ print "add this tis /boot/config.txt\n\n";
 
 my @gpios;
 foreach my $i (sort keys %{$config->{relay}}) {
-  push(@gpios, $i);
+  push(@gpios, $config->{relay}->{$i}->{gpio});
 }
 
 print "gpio=" . join(",", @gpios) . "=op,dh\n";
