@@ -34,6 +34,13 @@ This will test all gpios and writes a findrelay.yaml file ... edit this file (ch
 cp findrelay.yaml relay.yaml
 ```
 
+## update boot config
+```sh
+perl updatebootconfig.pl
+```
+
+Add content to the bottom of /boot/config.txt
+
 ## install relay
 ```sh
 sh -x ./install.sh
