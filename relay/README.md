@@ -28,8 +28,7 @@ sh -x bootstrap.sh
 perl findrelay.pl
 ```
 
-This will test all gpios and writes a findrelay.yaml file ... edit this file (change names) and copy this over relay.yaml
-
+This will test all gpios and writes a relay.yaml file
 ```sh
 cp findrelay.yaml relay.yaml
 ```
@@ -45,3 +44,5 @@ Add content to the bottom of /boot/config.txt
 ```sh
 sh -x ./install.sh
 ```
+
+You can edit the /opt/remoteShack/relay/relay.yaml

@@ -38,6 +38,6 @@ for my $i ( ( 1 .. 26 ) ) {
     $relay->{$i}->write(HIGH);
 }
 
-DumpFile( 'findrelay.yaml', $data );
+DumpFile( 'relay.yaml', $data );
 
 ReadMode('restore');
