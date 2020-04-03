@@ -51,18 +51,37 @@ get '/:nr/:state' => sub {
     if ( $config->{relay}->{$nr}->{gpio} ) {
         if ( $state eq 'high' ) {
             $relay->{$nr}->write(HIGH);
-            $self->render( text => 'ok|state|high' );
+            my $data = {
+                'error' => 0,
+                'state' => 'high',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
         elsif ( $state eq 'low' ) {
             $relay->{$nr}->write(LOW);
-            $self->render( text => 'ok|state|low' );
+            my $data = {
+                'error' => 0,
+                'state' => 'low',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
         else {
-            $self->render( text => 'err|wrong state' );
+            my $data = {
+                'error' => 1,
+                'state' => 'wrong state',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
     }
     else {
-        $self->render( text => 'err|not found' );
+        my $data = {
+            'error' => 1,
+            'state' => 'not found'
+        };
+        $self->render( json => $data );
     }
 };
 
