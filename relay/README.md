@@ -29,3 +29,12 @@ perl findrelay.pl
 ```
 
 This will test all gpios and writes a findrelay.yaml file ... edit this file (change names) and copy this over relay.yaml
+
+```sh
+cp findrelay.yaml relay.yaml
+```
+
+## install relay
+```sh
+sh -x ./install.sh
+```
