@@ -9,6 +9,8 @@ sudo cpanm RPi::Pin;
 sudo cpanm RPi::Const;
 sudo cpanm Config::YAML;
 sudo cpanm Mojolicious::Lite
+sudo cpanm YAML
+sudo cpanm Term::ReadKey
 
 echo "add this:"
 
