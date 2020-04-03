@@ -17,8 +17,8 @@ my $mojoconfig = plugin Config => { file => 'mojo.conf' };
 my $relay;
 
 foreach my $relay_key ( keys %{ $config->{relay} } ) {
-    $relay->{$relay_key} =
-      RPi::Pin->new( $config->{relay}->{$relay_key}->{gpio} );
+    $relay->{$relay_key}
+        = RPi::Pin->new( $config->{relay}->{$relay_key}->{gpio} );
     $relay->{$relay_key}->mode(OUTPUT);
     if ( $config->{relay}->{$relay_key}->{state} eq 'low' ) {
         $relay->{$relay_key}->write(LOW);
@@ -30,13 +30,13 @@ foreach my $relay_key ( keys %{ $config->{relay} } ) {
         print "config error\n";
     }
     print "Init relay ["
-      . $relay_key
-      . "] -> gpio -> ["
-      . $config->{relay}->{$relay_key}->{gpio}
-      . "] state ["
-      . $config->{relay}->{$relay_key}->{state}
-      . "] name ["
-      . $config->{relay}->{$relay_key}->{name} . "]\n";
+        . $relay_key
+        . "] -> gpio -> ["
+        . $config->{relay}->{$relay_key}->{gpio}
+        . "] state ["
+        . $config->{relay}->{$relay_key}->{state}
+        . "] name ["
+        . $config->{relay}->{$relay_key}->{name} . "]\n";
 }
 
 get '/:nr/:state' => sub {
@@ -77,17 +77,36 @@ get '/:nr' => sub {
     if ( $config->{relay}->{$nr}->{gpio} ) {
         my $read_state = $relay->{$nr}->read();
         if ( $read_state eq '0' ) {
-            $self->render( text => 'ok|state|low' );
+            my $data = {
+                'error' => 0,
+                'state' => 'low',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
         elsif ( $read_state eq '1' ) {
-            $self->render( text => 'ok|state|high' );
+            my $data = {
+                'error' => 0,
+                'state' => 'high',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
         else {
-            $self->render( text => 'ok|state|err' );
+            my $data = {
+                'error' => 0,
+                'state' => 'error',
+                'name'  => $config->{relay}->{$nr}->{name}
+            };
+            $self->render( json => $data );
         }
     }
     else {
-        $self->render( text => 'err|not found' );
+        my $data = {
+            'error' => 1,
+            'state' => 'error',
+        };
+        $self->render( json => $data );
     }
 };
 
