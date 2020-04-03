@@ -2,7 +2,7 @@
 
 relay adressable via http rest
 
-# install
+# install and configure
 
 ## update system
 
@@ -23,7 +23,7 @@ cd remoteShack/relay
 sh -x bootstrap.sh
 ```
 
-### findrelay
+## findrelay
 ```sh
 perl findrelay.pl
 ```
