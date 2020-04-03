@@ -2,9 +2,9 @@
 
 # run as root
 
-mkdir -p /opt/on3ure/relay
-cp relay.pl /opt/on3ure/relay
-cp mojo.conf /opt/on3ure/relay
+mkdir -p /opt/remoteShack/relay
+cp relay.pl /opt/remoteShack/relay
+cp mojo.conf /opt/remoteShack/relay
 
 cp relay.service /lib/systemd/system/
 

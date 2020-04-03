@@ -1,5 +1,5 @@
 [Unit]
-Description=ON3URE Relais
+Description=remoteShack Relay
 Requires=network.target
 After=network.target
 
@@ -7,9 +7,9 @@ After=network.target
 Type=simple
 Restart=always
 SyslogIdentifier=relay
-WorkingDirectory=/opt/on3ure/relay
+WorkingDirectory=/opt/remoteShack/relay
 ExecStartPre=/usr/bin/tvservice -o
-ExecStart=/usr/local/bin/hypnotoad -f /opt/on3ure/relay/relay.pl
+ExecStart=/usr/local/bin/hypnotoad -f /opt/remoteShack/relay/relay.pl
 
 [Install]
 WantedBy=multi-user.target
