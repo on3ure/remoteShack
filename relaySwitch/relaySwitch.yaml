@@ -1,0 +1,23 @@
+---
+receive:
+  active: true
+  mulitple: true
+  endpoint:
+    'Bonito Whip':
+      on: http://172.16.30.74/1/low
+      off: http://172.16.30.74/1/high
+      state: http://172.16.30.74/1
+      map:
+        low: true
+        high: false
+      active: true
+    'Wellbrook Loop':
+      on: http://172.16.30.74/2/low
+      off: http://172.16.30.74/2/high
+      state: http://172.16.30.74/2
+      map:
+        low: true
+        high: false
+      active: true
+transmit:
+equipment:
