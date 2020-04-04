@@ -29,9 +29,6 @@ perl findrelay.pl
 ```
 
 This will test all gpios and writes a relay.yaml file
-```sh
-cp findrelay.yaml relay.yaml
-```
 
 ## update boot config
 ```sh
