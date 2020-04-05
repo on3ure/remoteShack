@@ -21,3 +21,14 @@ receive:
       active: true
 transmit:
 equipment:
+  active: true
+  mulitple: true
+  endpoint:
+    'FlexRadio 6400':
+      on: http://172.16.30.75/8/low
+      off: http://172.16.30.75/8/high
+      state: http://172.16.30.75/8
+      map:
+        low: true
+        high: false
+      active: true
