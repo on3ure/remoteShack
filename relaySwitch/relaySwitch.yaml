@@ -1,34 +1,74 @@
 ---
 receive:
   active: true
-  mulitple: true
+  multiple: false
   endpoint:
     'Bonito Whip':
       on: http://172.16.30.74/1/low
       off: http://172.16.30.74/1/high
       state: http://172.16.30.74/1
       map:
-        low: true
-        high: false
+        low: on
+        high: off
       active: true
     'Wellbrook Loop':
       on: http://172.16.30.74/2/low
       off: http://172.16.30.74/2/high
       state: http://172.16.30.74/2
       map:
-        low: true
-        high: false
+        low: on
+        high: off
+      active: true
+    'HexBeam':
+      on: http://172.16.30.74/3/low
+      off: http://172.16.30.74/3/high
+      state: http://172.16.30.74/3
+      map:
+        low: on
+        high: off
+      active: true
+    'SwitchOnRoof':
+      on: http://172.16.30.74/4/low
+      off: http://172.16.30.74/4/high
+      state: http://172.16.30.74/4
+      map:
+        low: on
+        high: off
+      active: true
+    'HyEnd SWL':
+      on: http://172.16.30.74/5/low
+      off: http://172.16.30.74/5/high
+      state: http://172.16.30.74/5
+      map:
+        low: on
+        high: off
+      active: true
+    'Test Antenna':
+      on: http://172.16.30.74/6/low
+      off: http://172.16.30.74/6/high
+      state: http://172.16.30.74/6
+      map:
+        low: on
+        high: off
       active: true
 transmit:
 equipment:
   active: true
-  mulitple: true
+  multiple: true
   endpoint:
     'FlexRadio 6400':
-      on: http://172.16.30.75/8/low
-      off: http://172.16.30.75/8/high
-      state: http://172.16.30.75/8
+      on: http://172.16.30.75/6/low
+      off: http://172.16.30.75/6/high
+      state: http://172.16.30.75/6
       map:
-        low: true
-        high: false
+        low: on
+        high: off
+      active: true
+    'Test':
+      on: http://172.16.30.75/7/low
+      off: http://172.16.30.75/7/high
+      state: http://172.16.30.75/7
+      map:
+        low: on
+        high: off
       active: true
