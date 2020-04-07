@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import keybow
 import time
+import request
 
 
 keybow.setup(keybow.MINI)
@@ -10,6 +11,7 @@ ptt = 0
 rxselect = 0
 pttbutton = 1
 txselect = 2
+
 
 @keybow.on()
 def handle_key(index, state):
@@ -24,23 +26,23 @@ def handle_key(index, state):
         'pressed' if state else 'released'))
 
     if state:
-      if index == pttbutton :
-        if ptt == 1 :
-          keybow.set_led(index, 0, 0, 0)
-          ptt = 0
+        if index == pttbutton:
+            if ptt == 1:
+                keybow.set_led(index, 0, 0, 0)
+            ptt = 0
         else:
-          keybow.set_led(index, 255, 0, 0)
-          ptt = 1
-      
-      if index == rxselect :
-        if ptt == 0 :
-          keybow.set_led(index, 0, 255, 0)
-      if index == txselect :
-        if ptt == 0 :
-          keybow.set_led(index, 0, 0, 255)
+            keybow.set_led(index, 255, 0, 0)
+            ptt = 1
+
+    if index == rxselect:
+        if ptt == 0:
+            keybow.set_led(index, 0, 255, 0)
+        if index == txselect:
+            if ptt == 0:
+                keybow.set_led(index, 0, 0, 255)
     else:
-      if index != pttbutton :
-          keybow.set_led(index, 0, 0, 0)
+        if index != pttbutton:
+            keybow.set_led(index, 0, 0, 0)
 
 
 while True:
