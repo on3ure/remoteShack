@@ -1,7 +1,7 @@
 ---
 input:
-  8:
-    gpio: 26
-    name: name 26
+  1:
+    gpio: 5
+    name: footswitch
     state: high
 
