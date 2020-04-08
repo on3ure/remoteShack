@@ -1,0 +1,7 @@
+---
+input:
+  8:
+    gpio: 26
+    name: name 26
+    state: high
+
