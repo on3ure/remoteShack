@@ -67,6 +67,12 @@ def handle_key(index, state):
 while True:
     keybow.show()
     if redis.get('ptt'):
-        keybow.set_led(1, 255, 0, 0)
-        ptt = 1
+        if ptt == 0:
+            keybow.set_led(pttbutton, 255, 0, 0)
+            ptt = 1
+    else:
+        if ptt == 1:
+            keybow.set_led(pttbutton, 0, 0, 0)
+            ptt = 0
+
     time.sleep(1.0 / 60.0)
