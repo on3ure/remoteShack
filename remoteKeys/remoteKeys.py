@@ -27,9 +27,6 @@ def handle_key(index, state):
     global ccwselect
     global ptt
 
-    if redis.get('ptt'):
-        ptt = redis.get('ptt')
-
     # check web for ptt button of on -> ptt to 1
     # TODO !!!!
 
@@ -69,4 +66,6 @@ def handle_key(index, state):
 
 while True:
     keybow.show()
+    if redis.get('ptt'):
+        keybow.set_led(1, 255, 0, 0)
     time.sleep(1.0 / 60.0)
