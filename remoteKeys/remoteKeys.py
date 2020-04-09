@@ -5,8 +5,6 @@ import requests
 import redis
 
 
-redis = redis.Redis(host='localhost', port=6379, db=0)
-
 pttON_URL = "http://172.16.30.76/2/low"
 pttOFF_URL = "http://172.16.30.76/2/high"
 rxURL = "http://172.16.30.76/receive/next"
@@ -19,6 +17,7 @@ pttbutton = 1
 txselect = 2
 
 keybow.setup(keybow.MINI)
+redis = redis.Redis(host='localhost', port=6379, db=0)
 
 
 @keybow.on()
