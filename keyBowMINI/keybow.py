@@ -2,9 +2,15 @@
 import keybow
 import time
 import requests
+import redis
 
 
-keybow.setup(keybow.MINI)
+redis = redis.Redis(host='localhost', port=6379, db=0)
+
+pttON_URL = "http://172.16.30.76/2/low"
+pttOFF_URL = "http://172.16.30.76/2/high"
+rxURL = "http://172.16.30.76/receive/next"
+txURL = "http://172.16.30.76/transmit/next"
 
 ptt = 0
 
@@ -12,10 +18,7 @@ rxselect = 0
 pttbutton = 1
 txselect = 2
 
-pttON_URL = "http://172.16.30.76/2/low"
-pttOFF_URL = "http://172.16.30.76/2/high"
-rxURL = "http://172.16.30.76/receive/next"
-txURL = "http://172.16.30.76/transmit/next"
+keybow.setup(keybow.MINI)
 
 
 @keybow.on()
