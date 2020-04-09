@@ -14,6 +14,7 @@ ptt = 0
 
 cwselect = 0
 pttbutton = 1
+pttlight = 0
 ccwselect = 2
 
 keybow.setup(keybow.MINI)
@@ -33,14 +34,12 @@ def handle_key(index, state):
     if state:
         if index == pttbutton:
             if ptt == 1:
-                keybow.set_led(index, 0, 0, 0)
                 try:
                     requests.get(url=pttOFF_URL, timeout=1)
                 except requests.exceptions.RequestException as e:  # This is the correct syntax
                     print(e)
                 ptt = 0
             else:
-                keybow.set_led(index, 255, 0, 0)
                 try:
                     requests.get(url=pttON_URL, timeout=1)
                 except requests.exceptions.RequestException as e:  # This is the correct syntax
@@ -67,12 +66,13 @@ def handle_key(index, state):
 while True:
     keybow.show()
     if redis.get('ptt'):
-        if ptt == 0:
+        if pttlight == 0:
             keybow.set_led(pttbutton, 255, 0, 0)
+            pttlight = 1
             ptt = 1
     else:
-        if ptt == 1:
+        if pttlight == 1:
             keybow.set_led(pttbutton, 0, 0, 0)
-            ptt = 0
+            pttlight = 0
 
     time.sleep(1.0 / 60.0)
