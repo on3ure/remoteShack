@@ -68,4 +68,5 @@ while True:
     keybow.show()
     if redis.get('ptt'):
         keybow.set_led(1, 255, 0, 0)
+        ptt = 1
     time.sleep(1.0 / 60.0)
