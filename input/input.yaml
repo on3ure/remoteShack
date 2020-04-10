@@ -6,10 +6,10 @@ input:
     state: high
     toggle: true
     trigger:
-        'Maestro PTT':
-            active: true
-            on: http://172.16.30.76/2/low
-            off: http://172.16.30.76/2/high
+      'Maestro PTT':
+         active: true
+         on: http://172.16.30.76/2/low
+         off: http://172.16.30.76/2/high
     map:
         0: on
         1: off
