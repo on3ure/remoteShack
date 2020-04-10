@@ -1,0 +1,32 @@
+---
+pttBroadcast:
+  'FlexRadio 6400 RX2':
+    active: true
+    state: http://172.16.30.74/8
+    map:
+      low: on
+      high: off
+    broadcast:
+      remoteKeys:
+        on: http://172.16.30.75/7/low
+        off: http://172.16.30.75/7/high
+  'DVMega Cast':
+    active: false
+    state: http://172.16.30.74/8
+    map:
+      low: on
+      high: off
+    broadcast:
+      remoteKeys:
+        on: http://172.16.30.75/7/low
+        off: http://172.16.30.75/7/high
+  'IC 9700':
+    active: false
+    state: http://172.16.30.74/8
+    map:
+      low: on
+      high: off
+    broadcast:
+      remoteKeys:
+        on: http://172.16.30.75/7/low
+        off: http://172.16.30.75/7/high

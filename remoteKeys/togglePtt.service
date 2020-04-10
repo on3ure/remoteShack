@@ -1,0 +1,15 @@
+[Unit]
+Description=remoteShack togglePtt
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+SyslogIdentifier=togglePtt
+WorkingDirectory=/opt/remoteShack/remoteKeys
+ExecStartPre=/usr/bin/tvservice -o
+ExecStart=/usr/local/bin/hypnotoad -f /opt/remoteShack/remoteKeys/togglePtt.pl
+
+[Install]
+WantedBy=multi-user.target

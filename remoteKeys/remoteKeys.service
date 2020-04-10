@@ -1,0 +1,16 @@
+[Unit]
+Description=remoteShack remoteKeys
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+SyslogIdentifier=remoteKeys
+WorkingDirectory=/opt/remoteShack/remoteKeys
+ExecStartPre=/usr/bin/tvservice -o
+ExecStart=/usr/bin/python3 /opt/remoteShack/remoteKeys/remoteKeys.py
+
+[Install]
+WantedBy=multi-user.target
