@@ -4,7 +4,6 @@
 
 mkdir -p /opt/remoteShack/input
 cp input.pl /opt/remoteShack/input
-cp mojo.conf /opt/remoteShack/input
 
 cp input.service /lib/systemd/system/
 
