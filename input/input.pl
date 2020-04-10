@@ -102,5 +102,5 @@ while (1) {
             $input->{$input_key}->{laststate} = $state;
         }
     }
-    usleep( 10 * 1000 );
+    usleep( 1000 );
 }
