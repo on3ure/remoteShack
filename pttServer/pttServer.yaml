@@ -3,7 +3,6 @@ tranceivers:
   'FlexRadio 6400':
     on: http://172.16.30.74/1/low
     off: http://172.16.30.74/1/high
-    state: http://172.16.30.74/1
     map:
       low: on
       high: off
@@ -11,7 +10,6 @@ tranceivers:
   'DV Mega':
     on: http://172.16.30.74/1/low
     off: http://172.16.30.74/1/high
-    state: http://172.16.30.74/1
     map:
       low: on
       high: off
@@ -19,7 +17,6 @@ tranceivers:
   'Icom 9700':
     on: http://172.16.30.74/1/low
     off: http://172.16.30.74/1/high
-    state: http://172.16.30.74/1
     map:
       low: on
       high: off

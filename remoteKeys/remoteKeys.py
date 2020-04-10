@@ -28,9 +28,6 @@ def handle_key(index, state):
     global ccwselect
     global ptt
 
-    # check web for ptt button of on -> ptt to 1
-    # TODO !!!!
-
     if state:
         if index == pttbutton:
             if ptt == 1:
