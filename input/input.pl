@@ -38,6 +38,8 @@ while (1) {
         my $state = $input->{$input_key}->{pin}->read;
         if ( $input->{$input_key}->{laststate} ne $state ) {
             if ( $input->{$input_key}->{toggle} eq 'true' ) {
+              # check state on toggle 
+              # TODO !!!!! if remote state does not match switch toggle
                 if (   ( $state eq 0 )
                     && ( $input->{$input_key}->{togglestate} eq 0 ) )
                 {
