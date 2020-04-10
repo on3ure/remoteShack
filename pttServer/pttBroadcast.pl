@@ -15,20 +15,62 @@ my $pm = Parallel::ForkManager->new(30);
 
 BROADCAST:
 foreach my $broadcastName ( keys %{ $config->{pttBroadcast} } ) {
-    $pm->start and next BROADCAST;
     if ( $config->{pttBroadcast}->{$broadcastName}->{active} eq 'true' ) {
+        $pm->start and next BROADCAST;
 
         # UserAgent
         my $ua = Mojo::UserAgent->new;
+
+        my $currentstate = 'off';
 
         while (1) {
             my $res
                 = $ua->get(
                 $config->{pttBroadcast}->{$broadcastName}->{state} )
                 ->result->json;
-                print $config->{pttBroadcast}->{$broadcastName}->{map}->{$res->{state}}  . "\n";
-            sleep(1);
-            usleep( 10 * 1000 );
+            if ( $config->{pttBroadcast}->{$broadcastName}->{map}
+                ->{ $res->{state} } ne $currentstate )
+            {
+                if ( $config->{pttBroadcast}->{$broadcastName}->{map}
+                    ->{ $res->{state} } eq 'off' )
+                {
+                    foreach my $broadcastTarget (
+                        keys %{
+                            $config->{pttBroadcast}->{$broadcastName}
+                                ->{broadcast}
+                        }
+                        )
+                    {
+                        $ua->get(
+                            $config->{pttBroadcast}->{$broadcastName}
+                                ->{broadcast}->{$broadcastTarget}->{off} )
+                            ->result->json;
+                    }
+                }
+                if ( $config->{pttBroadcast}->{$broadcastName}->{map}
+                    ->{ $res->{state} } eq 'on' )
+                {
+                    foreach my $broadcastTarget (
+                        keys %{
+                            $config->{pttBroadcast}->{$broadcastName}
+                                ->{broadcast}
+                        }
+                        )
+                    {
+                        $ua->get(
+                            $config->{pttBroadcast}->{$broadcastName}
+                                ->{broadcast}->{$broadcastTarget}->{on} )
+                            ->result->json;
+                    }
+                }
+                else {
+                }
+                $currentstate
+                    = $config->{pttBroadcast}->{$broadcastName}->{map}
+                    ->{ $res->{state} };
+
+                usleep( 10 * 1000 );
+            }
         }
         $pm->finish;    # do the exit in the child process
     }
