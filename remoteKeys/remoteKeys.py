@@ -49,12 +49,16 @@ def handle_key(index, state):
                 requests.get(url=cwURL, timeout=1)
             except requests.exceptions.RequestException as e:  # This is the correct syntax
                 print(e)
+            print("cw\n")
+            time.sleep(1)
         if index == ccwselect:
             keybow.set_led(index, 0, 0, 255)
             try:
                 requests.get(url=ccwURL, timeout=1)
             except requests.exceptions.RequestException as e:  # This is the correct syntax
                 print(e)
+            print("ccw\n")
+            time.sleep(1)
     else:
         if index != pttbutton:
             keybow.set_led(index, 0, 0, 0)

@@ -10,6 +10,9 @@ pttBroadcast:
       remoteKeys:
         on: http://172.16.30.77/ptt/on
         off: http://172.16.30.77/ptt/off
+      onAirLab:
+        on: http://172.16.30.74/7/low
+        off: http://172.16.30.74/7/high
   'DVMega Cast':
     active: false
     state: http://172.16.30.74/8
