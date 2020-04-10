@@ -2,15 +2,14 @@
 
 # run as root
 
-mkdir -p /opt/remoteShack/relay
-cp relay.pl /opt/remoteShack/relay
-cp mojo.conf /opt/remoteShack/relay
-cp relay.yaml /opt/remoteShack/relay > /dev/null 2>&1
+mkdir -p /opt/remoteShack/input
+cp input.pl /opt/remoteShack/input
+cp mojo.conf /opt/remoteShack/input
 
-cp relay.service /lib/systemd/system/
+cp input.service /lib/systemd/system/
 
 systemctl --system daemon-reload
 
-systemctl enable relay
-systemctl stop relay
-systemctl start relay
+systemctl enable input
+systemctl stop input
+systemctl start input

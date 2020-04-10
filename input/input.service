@@ -1,15 +1,15 @@
 [Unit]
-Description=remoteShack Relay
+Description=remoteShack input
 Requires=network.target
 After=network.target
 
 [Service]
 Type=simple
 Restart=always
-SyslogIdentifier=relay
-WorkingDirectory=/opt/remoteShack/relay
+SyslogIdentifier=input
+WorkingDirectory=/opt/remoteShack/input
 ExecStartPre=/usr/bin/tvservice -o
-ExecStart=/usr/local/bin/hypnotoad -f /opt/remoteShack/relay/relay.pl
+ExecStart=/usr/local/bin/hypnotoad -f /opt/remoteShack/input/input.pl
 
 [Install]
 WantedBy=multi-user.target
