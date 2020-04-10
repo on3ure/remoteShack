@@ -8,8 +8,13 @@ use RPi::Pin;
 use RPi::Const qw(:all);
 use Config::YAML;
 use Time::HiRes qw( usleep);
+use Mojo::UserAgent;
 
+# Config
 my $config = Config::YAML->new( config => "input.yaml" );
+
+# UserAgent
+my $ua = Mojo::UserAgent->new;
 
 my $input;
 foreach my $input_key ( keys %{ $config->{input} } ) {
@@ -37,22 +42,55 @@ while (1) {
                     && ( $input->{$input_key}->{togglestate} eq 0 ) )
                 {
                     $input->{$input_key}->{togglestate} = 1;
-                    print "on\n";
+                    my $mapState = $input->{$input_key}->{map}->{$state}; 
+                    print $mapState . "\n";
+                    foreach my $remote (
+                        keys %{ $config->{input}->{$input_key}->{trigger} } )
+                    {
+                        if ( $config->{input}->{$input_key}->{trigger}
+                            ->{$remote}->{active} eq 'true' )
+                        {
+                            $ua->get(
+                                $config->{input}->{$input_key}->{trigger}
+                                    ->{$remote}->{$mapState} )->result->json;
+                        }
+                    }
                     usleep( 250 * 1000 );
                 }
                 elsif (( $state eq 0 )
                     && ( $input->{$input_key}->{togglestate} eq 1 ) )
                 {
                     $input->{$input_key}->{togglestate} = 0;
-                    print "off\n";
+                    my $mapState = $input->{$input_key}->{map}->{$state}; 
+                    print $mapState . "\n";
+                    foreach my $remote (
+                        keys %{ $config->{input}->{$input_key}->{trigger} } )
+                    {
+                        if ( $config->{input}->{$input_key}->{trigger}
+                            ->{$remote}->{active} eq 'true' )
+                        {
+                            $ua->get(
+                                $config->{input}->{$input_key}->{trigger}
+                                    ->{$remote}->{$mapState} )->result->json;
+                        }
+                    }
                     usleep( 250 * 1000 );
                 }
 
             }
             else {
                 if ( $input->{$input_key}->{state} ne $state ) {
-                    print $config->{input}->{$input_key}->{name} . " -> "
-                        . $state . "\n";
+                    foreach my $remote (
+                        keys %{ $config->{input}->{$input_key}->{trigger} } )
+                    {
+                        if ( $config->{input}->{$input_key}->{trigger}
+                            ->{$remote}->{active} eq 'true' )
+                        {
+                            $ua->get(
+                                $config->{input}->{$input_key}->{trigger}
+                                    ->{$remote}->{off} )->result->json;
+                        }
+                    }
                     $input->{$input_key}->{state} = $state;
 
                 }
