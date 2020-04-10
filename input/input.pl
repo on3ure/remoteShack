@@ -42,7 +42,7 @@ while (1) {
                     && ( $input->{$input_key}->{togglestate} eq 0 ) )
                 {
                     $input->{$input_key}->{togglestate} = 1;
-                    my $mapState = $input->{$input_key}->{map}->{$state}; 
+                    my $mapState = $config->{input}->{$input_key}->{map}->{$state}; 
                     print $state . " -> " . $mapState . "\n";
                     foreach my $remote (
                         keys %{ $config->{input}->{$input_key}->{trigger} } )
@@ -61,7 +61,7 @@ while (1) {
                     && ( $input->{$input_key}->{togglestate} eq 1 ) )
                 {
                     $input->{$input_key}->{togglestate} = 0;
-                    my $mapState = $input->{$input_key}->{map}->{$state}; 
+                    my $mapState = $config->{input}->{$input_key}->{map}->{$state}; 
                     print $state . " -> " . $mapState . "\n";
                     foreach my $remote (
                         keys %{ $config->{input}->{$input_key}->{trigger} } )
