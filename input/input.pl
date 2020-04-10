@@ -41,7 +41,8 @@ while (1) {
                 if (   ( $state eq 0 )
                     && ( $input->{$input_key}->{togglestate} eq 0 ) )
                 {
-                    my $mapState = $config->{input}->{$input_key}->{map}->{$input->{$input_key}->{togglestate}}; 
+                    my $mapState = $config->{input}->{$input_key}->{map}
+                        ->{ $input->{$input_key}->{togglestate} };
                     $input->{$input_key}->{togglestate} = 1;
                     print $state . " -> " . $mapState . "\n";
                     foreach my $remote (
@@ -60,8 +61,9 @@ while (1) {
                 elsif (( $state eq 0 )
                     && ( $input->{$input_key}->{togglestate} eq 1 ) )
                 {
-                    my $mapState = $config->{input}->{$input_key}->{map}->{$input->{$input_key}->{togglestate}}; 
-                    $input->{$input_key}->{togglestate} = 1;
+                    my $mapState = $config->{input}->{$input_key}->{map}
+                        ->{ $input->{$input_key}->{togglestate} };
+                    $input->{$input_key}->{togglestate} = 0;
                     print $state . " -> " . $mapState . "\n";
                     foreach my $remote (
                         keys %{ $config->{input}->{$input_key}->{trigger} } )
@@ -86,9 +88,12 @@ while (1) {
                         if ( $config->{input}->{$input_key}->{trigger}
                             ->{$remote}->{active} eq 'true' )
                         {
+                            my $mapState
+                                = $config->{input}->{$input_key}->{map}
+                                ->{$state};
                             $ua->get(
                                 $config->{input}->{$input_key}->{trigger}
-                                    ->{$remote}->{off} )->result->json;
+                                    ->{$remote}->{$mapState} )->result->json;
                         }
                     }
                     $input->{$input_key}->{state} = $state;
