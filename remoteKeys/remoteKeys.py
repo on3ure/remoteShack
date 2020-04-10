@@ -44,7 +44,7 @@ def handle_key(index, state):
                 ptt = 1
 
         if index == cwselect:
-            keybow.set_led(index, 0, 255, 0)
+            keybow.set_led(index, 0, 0, 255)
             try:
                 requests.get(url=cwURL, timeout=1)
             except requests.exceptions.RequestException as e:  # This is the correct syntax
