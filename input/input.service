@@ -9,7 +9,7 @@ Restart=always
 SyslogIdentifier=input
 WorkingDirectory=/opt/remoteShack/input
 ExecStartPre=/usr/bin/tvservice -o
-ExecStart=/usr/local/bin/hypnotoad -f /opt/remoteShack/input/input.pl
+ExecStart=/opt/remoteShack/input/input.pl
 
 [Install]
 WantedBy=multi-user.target
