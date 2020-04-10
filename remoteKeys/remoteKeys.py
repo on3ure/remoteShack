@@ -71,5 +71,6 @@ while True:
         if pttlight == 1:
             keybow.set_led(pttbutton, 0, 0, 0)
             pttlight = 0
+            ptt = 0
 
     time.sleep(1.0 / 120.0)
