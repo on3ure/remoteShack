@@ -50,29 +50,33 @@ while (1) {
                         if ( $config->{input}->{$input_key}->{trigger}
                             ->{$remote}->{active} eq 'true' )
                         {
-                     # check state on toggle
-                     # TODO !!!!! if remote state does not match switch toggle
-                            my $rstate
-                                = $ua->get(
-                                $config->{input}->{$input_key}->{trigger}
-                                    ->{$remote}->{state} )->result->json;
+                            if ( $config->{input}->{$input_key}->{trigger}
+                                ->{$remote}->{checkstate} eq 'true' )
+                            {
+                                my $rstate
+                                    = $ua->get(
+                                    $config->{input}->{$input_key}->{trigger}
+                                        ->{$remote}->{state} )->result->json;
 
-                            my $rmapState
-                                = $config->{input}->{$input_key}->{map}
-                                ->{ $rstate->{state} };
+                                my $rmapState
+                                    = $config->{input}->{$input_key}->{map}
+                                    ->{ $rstate->{state} };
 
-                            if ( $rstate->{state} ne $rmapState ) {
-                                if ( $rmapState eq 'off' ) {
-                                    $ua->get( $config->{input}->{$input_key}
-                                            ->{trigger}->{$remote}->{on} )
-                                        ->result->json;
+                                if ( $rstate->{state} ne $rmapState ) {
+                                    if ( $rmapState eq 'off' ) {
+                                        $ua->get(
+                                            $config->{input}->{$input_key}
+                                                ->{trigger}->{$remote}->{on} )
+                                            ->result->json;
+                                    }
+                                    else {
+                                        $ua->get(
+                                            $config->{input}->{$input_key}
+                                                ->{trigger}->{$remote}->{off}
+                                        )->result->json;
+                                    }
+
                                 }
-                                else {
-                                    $ua->get( $config->{input}->{$input_key}
-                                            ->{trigger}->{$remote}->{off} )
-                                        ->result->json;
-                                }
-
                             }
                             else {
                                 $ua->get(
