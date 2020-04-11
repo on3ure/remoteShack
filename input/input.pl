@@ -38,8 +38,6 @@ while (1) {
         my $state = $input->{$input_key}->{pin}->read;
         if ( $input->{$input_key}->{laststate} ne $state ) {
             if ( $input->{$input_key}->{toggle} eq 'true' ) {
-              # check state on toggle 
-              # TODO !!!!! if remote state does not match switch toggle
                 if (   ( $state eq 0 )
                     && ( $input->{$input_key}->{togglestate} eq 0 ) )
                 {
@@ -52,9 +50,36 @@ while (1) {
                         if ( $config->{input}->{$input_key}->{trigger}
                             ->{$remote}->{active} eq 'true' )
                         {
-                            $ua->get(
+                     # check state on toggle
+                     # TODO !!!!! if remote state does not match switch toggle
+                            my $rstate
+                                = $ua->get(
                                 $config->{input}->{$input_key}->{trigger}
-                                    ->{$remote}->{$mapState} )->result->json;
+                                    ->{$remote}->{state} )->result->json;
+
+                            my $rmapState
+                                = $config->{input}->{$input_key}->{map}
+                                ->{ $rstate->{state} };
+
+                            if ( $rstate->{state} ne $rmapState ) {
+                                if ( $rmapState eq 'off' ) {
+                                    $ua->get( $config->{input}->{$input_key}
+                                            ->{trigger}->{$remote}->{on} )
+                                        ->result->json;
+                                }
+                                else {
+                                    $ua->get( $config->{input}->{$input_key}
+                                            ->{trigger}->{$remote}->{off} )
+                                        ->result->json;
+                                }
+
+                            }
+                            else {
+                                $ua->get(
+                                    $config->{input}->{$input_key}->{trigger}
+                                        ->{$remote}->{$mapState} )
+                                    ->result->json;
+                            }
                         }
                     }
                     usleep( 250 * 1000 );
@@ -104,5 +129,5 @@ while (1) {
             $input->{$input_key}->{laststate} = $state;
         }
     }
-    usleep( 1000 );
+    usleep(1000);
 }
