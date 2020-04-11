@@ -19,7 +19,7 @@ my $relay;
 foreach my $relay_key ( keys %{ $config->{relay} } ) {
     $relay->{$relay_key}
         = RPi::Pin->new( $config->{relay}->{$relay_key}->{gpio} );
-    $relay->{$relay_key}->mode(OUTPUT);
+    $relay->{$relay_key}->mode($config->{relay}->{$relay_key}->{mode});
     if ( $config->{relay}->{$relay_key}->{state} eq 'low' ) {
         $relay->{$relay_key}->write(LOW);
     }
