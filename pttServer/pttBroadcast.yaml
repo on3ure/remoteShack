@@ -13,6 +13,9 @@ pttBroadcast:
       onAirLab:
         on: http://172.16.30.74/7/low
         off: http://172.16.30.74/7/high
+      centralStation:
+        on: http://172.16.30.48:3000/broadcast/ptt/flexradio/on
+        off: http://172.16.30.48:3000/broadcast/ptt/flexradio/off
   'DVMega Cast':
     active: false
     state: http://172.16.30.74/8
@@ -33,3 +36,6 @@ pttBroadcast:
       remoteKeys:
         on: http://172.16.30.75/7/low
         off: http://172.16.30.75/7/high
+      centralStation:
+        on: http://172.16.30.48:3000/broadcast/ptt/flexradio/on
+        off: http://172.16.30.48:3000/broadcast/ptt/flexradio/off
