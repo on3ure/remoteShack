@@ -20,7 +20,7 @@ my $input;
 foreach my $input_key ( keys %{ $config->{input} } ) {
     $input->{$input_key}->{pin}
         = RPi::Pin->new( $config->{input}->{$input_key}->{gpio} );
-    $input->{$input_key}->{pin}->mode(INPUT);
+    $input->{$input_key}->{pin}->mode($config->{$input_key}->{mode});
     $input->{$input_key}->{state} = 1
         if $config->{input}->{$input_key}->{state} eq 'high';
     $input->{$input_key}->{state} = 0
