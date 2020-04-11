@@ -30,7 +30,6 @@ for my $i ( ( 1 .. 26 ) ) {
         $return = $return * 1;
         if ( $return ne 0 ) {
             $data->{relay}->{$return}->{gpio}  = $i;
-            $data->{relay}->{$return}->{mode} = 'OUTPUT';
             $data->{relay}->{$return}->{state} = 'high';
             $data->{relay}->{$return}->{name}  = 'name ' . $i;
         }
