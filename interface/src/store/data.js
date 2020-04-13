@@ -1,10 +1,23 @@
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
+import { switchMap, catchError } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
 
-const ws = webSocket('wss://172.16.30.48:3000/socket');
+const ws = webSocket('wss://poc-poc.weepee.cloud/socket');
 const subject = new Subject();
-const initialData = fromFetch('http://172.16.30.48:3000/receive/state');
+const initialData = fromFetch('https://poc-poc.weepee.cloud/receive/state').pipe(
+  switchMap(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      return of({ error: true, message: `Error ${response.status}` });
+    }
+  }),
+  catchError(err => {
+    console.error(err);
+    return of({ error: true, message: err.message });
+  }),
+);
 
 const initialState = {
   switches: {},
@@ -20,15 +33,30 @@ const dataStore = {
   subscribeInitialData: () => {
     initialData.subscribe({
       next: data => {
-        console.log(data);
-        state.switches = data;
+        state = {
+          ...state,
+          switches: data,
+        };
+        subject.next(state);
       },
     });
   },
-  subscribeWs: () =>
+  subscribeWs: () => {
     ws.subscribe(data => {
-      state.switches = data;
-    }),
+      let newState = {};
+      newState.switches = { ...state.switches, ...data.receive };
+      state = {
+        ...state,
+        ...newState,
+      };
+      console.log(state);
+      subject.next(state);
+    });
+  },
+  toggleSwitch: switchname => {
+    const status = state.switches[switchname] === 'on' ? 'off' : 'on';
+    fetch('https://poc-poc.weepee.cloud/receive/' + switchname + '/' + status);
+  },
   initialState,
 };
 
