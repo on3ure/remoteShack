@@ -21,12 +21,29 @@ my $ua = Mojo::UserAgent->new;
 # Mojo Config
 my $mojoconfig = plugin Config => { file => 'mojo.conf' };
 
+app->secrets( [ $config->{'appsecret'} ] );
+
 helper redis => sub { state $r = Mojo::Redis->new };
+
+hook before_dispatch => sub {
+    my $self        = shift;
+    my $request_url = $self->req->url->to_abs;
+
+    # securityheaders
+    foreach my $key (
+        keys %{ $config->{ 'securityheaders'  }
+        } )
+    {
+        $self->res->headers->append( $key =>
+                $config->{ 'securityheaders' }
+                ->{$key} );
+    }
+};
 
 get '/' => 'ws';
 
 websocket '/socket' => sub {
-    my $self      = shift;
+    my $self   = shift;
     my $pubsub = $self->redis->pubsub;
     my $cb     = $pubsub->listen(
         'remoteShack:events' => sub {
@@ -36,8 +53,8 @@ websocket '/socket' => sub {
     );
 
     $self->inactivity_timeout(3600);
-    $self->on( finish => sub { $pubsub->unlisten( 'remoteShack:events' => $cb ) }
-    );
+    $self->on(
+        finish => sub { $pubsub->unlisten( 'remoteShack:events' => $cb ) } );
     $self->on(
         message => sub {
             my ( $self, $msg ) = @_;
@@ -48,7 +65,7 @@ websocket '/socket' => sub {
 
 get '/broadcast/:category/:endpoint/:state' => sub {
     my $self = shift;
-    
+
     my $pubsub = $self->redis->pubsub;
 
     # reder when we are done
@@ -56,12 +73,12 @@ get '/broadcast/:category/:endpoint/:state' => sub {
 
     my $category = $self->stash('category');
     my $endpoint = $self->stash('endpoint');
-    my $state = $self->stash('state');
+    my $state    = $self->stash('state');
 
     my $wsdata = { $category => { $endpoint => $state } };
-            
+
     $pubsub->notify( 'remoteShack:events' => encode_json $wsdata );
-        
+
     my $rstate;
 
     $rstate->{error}   = 'false';
