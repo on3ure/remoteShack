@@ -30,14 +30,18 @@ hook before_dispatch => sub {
     my $request_url = $self->req->url->to_abs;
 
     # securityheaders
-    foreach my $key (
-        keys %{ $config->{ 'securityheaders'  }
-        } )
-    {
-        $self->res->headers->append( $key =>
-                $config->{ 'securityheaders' }
-                ->{$key} );
+    foreach my $key ( keys %{ $config->{'securityheaders'} } ) {
+        $self->res->headers->append(
+            $key => $config->{'securityheaders'}->{$key} );
     }
+};
+
+options '*' => sub {
+    my $self = shift;
+    return $self->render(
+        data   => '',
+        status => '200'
+    );
 };
 
 get '/' => 'ws';
