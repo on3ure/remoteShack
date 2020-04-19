@@ -127,8 +127,8 @@ get '/:category/state' => sub {
     }
 
     $state->{switchable} = $config->{$category}->{switchable};
-    $state->{multiple} = $config->{$category}->{multiple};
-    
+    $state->{multiple}   = $config->{$category}->{multiple};
+
     $self->render( json => $state );
 };
 
@@ -168,7 +168,7 @@ get '/:category/:endpoint/state' => sub {
         $state->{error}   = 'true';
         $state->{message} = $category . " not found";
     }
-    
+
     $self->render( json => $state );
 };
 
@@ -177,6 +177,8 @@ get '/:category/:endpoint/:switch' => sub {
 
     # reder when we are done
     $self->render_later;
+
+    my $pubsub = $self->redis->pubsub;
 
     my $category = $self->stash('category');
     my $endpoint = $self->stash('endpoint');
@@ -204,8 +206,8 @@ get '/:category/:endpoint/:switch' => sub {
                         if ( $config->{$category}->{endpoint}->{$endpoint}
                             ->{map}->{ $res->{state} } eq 'on' )
                         {
-                            foreach my $offurls ( @{
-                                    $config->{$category}->{endpoint}
+                            foreach my $offurls (
+                                @{  $config->{$category}->{endpoint}
                                         ->{$endpoint}->{off}
                                 }
                                 )
@@ -224,8 +226,8 @@ get '/:category/:endpoint/:switch' => sub {
                     eq 'true' )
                 )
             {
-                foreach my $on_off_urls ( @{
-                        $config->{$category}->{endpoint}->{$endpoint}
+                foreach my $on_off_urls (
+                    @{  $config->{$category}->{endpoint}->{$endpoint}
                             ->{$switch}
                     }
                     )
@@ -248,11 +250,30 @@ get '/:category/:endpoint/:switch' => sub {
                             ->{map}->{ $res->{state} };
                     }
                 }
+
             }
             else {
                 $state->{error}   = 'true';
                 $state->{message} = $endpoint . " not found";
             }
+            my $wsstate;
+            foreach
+                my $endpoint ( keys %{ $config->{$category}->{endpoint} } )
+            {
+                if ( $config->{$category}->{endpoint}->{$endpoint}->{active}
+                    eq 'true' )
+                {
+                    my $res
+                        = $ua->get(
+                        $config->{$category}->{endpoint}->{$endpoint}->{state}
+                    )->result->json;
+                    $wsstate->{$endpoint}
+                        = $config->{$category}->{endpoint}->{$endpoint}
+                        ->{map}->{ $res->{state} };
+                }
+            }
+            my $wsdata = { $category => $wsstate};
+            $pubsub->notify( 'remoteShack:events' => encode_json $wsdata );
         }
         else {
             $state->{error}   = 'true';
@@ -263,13 +284,9 @@ get '/:category/:endpoint/:switch' => sub {
         $state->{error}   = 'true';
         $state->{message} = $category . " not found";
     }
-                        
+
     $state->{switchable} = $config->{$category}->{switchable};
-    $state->{multiple} = $config->{$category}->{multiple};
-    
-    my $pubsub = $self->redis->pubsub;
-    my $wsdata = { $category => { $endpoint => $switch } };
-    $pubsub->notify( 'remoteShack:events' => encode_json $wsdata );
+    $state->{multiple}   = $config->{$category}->{multiple};
 
     $self->render( json => $state );
 };
