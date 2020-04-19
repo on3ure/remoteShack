@@ -266,6 +266,10 @@ get '/:category/:endpoint/:switch' => sub {
                         
     $state->{switchable} = $config->{$category}->{switchable};
     $state->{multiple} = $config->{$category}->{multiple};
+    
+    my $pubsub = $self->redis->pubsub;
+    my $wsdata = { $category => { $endpoint => $switch } };
+    $pubsub->notify( 'remoteShack:events' => encode_json $wsdata );
 
     $self->render( json => $state );
 };

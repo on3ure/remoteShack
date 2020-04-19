@@ -5,7 +5,7 @@ securityheaders:
   Access-Control-Allow-Methods: 'GET, OPTIONS, POST, DELETE, PUT'
   Access-Control-Allow-Origin: '*'
   Access-Control-Max-Age: 1728000
-  Content-Security-Policy: "default-src http: data: 'unsafe-inline' 'unsafe-eval'"
+  #Content-Security-Policy: "default-src http: data: 'unsafe-inline' 'unsafe-eval'"
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
