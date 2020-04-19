@@ -10,9 +10,9 @@ pttBroadcast:
       remoteKeys:
         on: http://172.16.30.77/ptt/on
         off: http://172.16.30.77/ptt/off
-      onAirLab:
-        on: http://172.16.30.74/7/low
-        off: http://172.16.30.74/7/high
+      onAir:
+        on: http://172.16.30.74/5/low
+        off: http://172.16.30.74/5/high
       centralStation:
         on: http://172.16.30.48:3000/broadcast/ptt/flexradio/on
         off: http://172.16.30.48:3000/broadcast/ptt/flexradio/off

@@ -126,6 +126,9 @@ get '/:category/state' => sub {
         $state->{message} = $category . " not found";
     }
 
+    $state->{switchable} = $config->{$category}->{switchable};
+    $state->{multiple} = $config->{$category}->{multiple};
+    
     $self->render( json => $state );
 };
 
@@ -165,7 +168,7 @@ get '/:category/:endpoint/state' => sub {
         $state->{error}   = 'true';
         $state->{message} = $category . " not found";
     }
-
+    
     $self->render( json => $state );
 };
 
@@ -193,6 +196,7 @@ get '/:category/:endpoint/:switch' => sub {
                     if ( $config->{$category}->{endpoint}->{$endpoint}
                         ->{active} eq 'true' )
                     {
+
                         my $res
                             = $ua->get(
                             $config->{$category}->{endpoint}->{$endpoint}
@@ -200,10 +204,14 @@ get '/:category/:endpoint/:switch' => sub {
                         if ( $config->{$category}->{endpoint}->{$endpoint}
                             ->{map}->{ $res->{state} } eq 'on' )
                         {
-                            $ua->get(
-                                $config->{$category}->{endpoint}->{$endpoint}
-                                    ->{off} )->result->json;
-
+                            foreach my $offurls ( @{
+                                    $config->{$category}->{endpoint}
+                                        ->{$endpoint}->{off}
+                                }
+                                )
+                            {
+                                $ua->get($offurls)->result->json;
+                            }
                         }
                     }
                 }
@@ -216,10 +224,15 @@ get '/:category/:endpoint/:switch' => sub {
                     eq 'true' )
                 )
             {
-                my $res
-                    = $ua->get(
-                    $config->{$category}->{endpoint}->{$endpoint}->{$switch} )
-                    ->result->json;
+                foreach my $on_off_urls ( @{
+                        $config->{$category}->{endpoint}->{$endpoint}
+                            ->{$switch}
+                    }
+                    )
+                {
+                    $ua->get($on_off_urls)->result->json;
+                }
+
                 foreach my $endpoint (
                     keys %{ $config->{$category}->{endpoint} } )
                 {
@@ -250,6 +263,9 @@ get '/:category/:endpoint/:switch' => sub {
         $state->{error}   = 'true';
         $state->{message} = $category . " not found";
     }
+                        
+    $state->{switchable} = $config->{$category}->{switchable};
+    $state->{multiple} = $config->{$category}->{multiple};
 
     $self->render( json => $state );
 };
