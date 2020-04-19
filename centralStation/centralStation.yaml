@@ -96,6 +96,41 @@ ptt:
         low: on
         high: off
       active: true
+ledtower:
+  active: true
+  multiple: false
+  switchable: true
+  endpoint:
+#    'buzzer':
+#      on: 
+#      - http://172.16.30.74/2/low
+#      off: 
+#      - http://172.16.30.74/2/high
+#      state: http://172.16.30.74/2
+#      map:
+#        low: on
+#        high: off
+#      active: true
+    'green':
+      on:
+      - http://172.16.30.74/3/low
+      off:
+      - http://172.16.30.74/3/high
+      state: http://172.16.30.74/3
+      map:
+        low: on
+        high: off
+      active: true
+    'orange':
+      on:
+      - http://172.16.30.74/4/low
+      off:
+      - http://172.16.30.74/4/high
+      state: http://172.16.30.74/2
+      map:
+        low: on
+        high: off
+      active: true
 equipment:
   active: true
   multiple: true
@@ -103,10 +138,10 @@ equipment:
   endpoint:
     'FlexRadio 6400':
       on: 
-      - http://172.16.30.75/7/low
+      - http://172.16.30.75/8/low
       off: 
-      - http://172.16.30.75/7/high
-      state: http://172.16.30.75/7
+      - http://172.16.30.75/8/high
+      state: http://172.16.30.75/8
       map:
         low: on
         high: off
@@ -117,6 +152,21 @@ equipment:
       off: 
       - http://172.16.30.75/7/high
       state: http://172.16.30.75/7
+      map:
+        low: on
+        high: off
+      active: true
+lights:
+  active: true
+  multiple: true
+  switchable: true
+  endpoint:
+    'HF Room':
+      on: 
+      - http://172.16.30.75/1/low
+      off: 
+      - http://172.16.30.75/1/high
+      state: http://172.16.30.75/1
       map:
         low: on
         high: off
