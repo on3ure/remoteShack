@@ -1,6 +1,6 @@
 ---
 pttBroadcast:
-  'FlexRadio 6400 RX2':
+  'FlexRadio 6400':
     active: true
     state: http://172.16.30.74/8
     map:
@@ -27,15 +27,18 @@ pttBroadcast:
         on: http://172.16.30.75/7/low
         off: http://172.16.30.75/7/high
   'IC 9700':
-    active: false
-    state: http://172.16.30.74/8
+    active: true
+    state: http://172.16.30.76/3
     map:
       low: on
       high: off
     broadcast:
       remoteKeys:
-        on: http://172.16.30.75/7/low
-        off: http://172.16.30.75/7/high
+        on: http://172.16.30.77/ptt/on
+        off: http://172.16.30.77/ptt/off
+      onAir:
+        on: http://172.16.30.74/5/low
+        off: http://172.16.30.74/5/high
       centralStation:
-        on: http://172.16.30.48:3000/broadcast/ptt/flexradio/on
-        off: http://172.16.30.48:3000/broadcast/ptt/flexradio/off
+        on: http://172.16.30.48:3000/broadcast/ptt/ic9700/on
+        off: http://172.16.30.48:3000/broadcast/ptt/ic9700/off

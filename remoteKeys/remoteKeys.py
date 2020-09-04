@@ -32,6 +32,7 @@ def handle_key(index, state):
         if index == pttbutton:
             if ptt == 1:
                 try:
+                    time.sleep(0.5)
                     requests.get(url=pttOFF_URL, timeout=1)
                 except requests.exceptions.RequestException as e:  # This is the correct syntax
                     print(e)

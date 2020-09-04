@@ -10,12 +10,62 @@ securityheaders:
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   X-Xss-Protection: 1; mode=block
+transmit:
+  active: true
+  multiple: false
+  switchable: true
+  endpoint:
+    'Tarheel':
+      info: '80m-20m'
+      on: 
+      - http://172.16.30.85/4/low
+      off: 
+      - http://172.16.30.85/4/high
+      state: http://172.16.30.85/4
+      map:
+        low: on
+        high: off
+      active: true
+    'HexxBeam':
+      info: '20m 17m 15m 12m 10m'
+      on: 
+      - http://172.16.30.85/3/low
+      off: 
+      - http://172.16.30.85/3/high
+      state: http://172.16.30.85/3
+      map:
+        low: on
+        high: off
+      active: true
+    'IsoTron':
+      info: '20m 15m 10m'
+      on: 
+      - http://172.16.30.85/2/low
+      off: 
+      - http://172.16.30.85/2/high
+      state: http://172.16.30.85/2
+      map:
+        low: on
+        high: off
+      active: true
+    'Dummy':
+      info: 'Dummy Load 500W'
+      on: 
+      - http://172.16.30.85/1/low
+      off: 
+      - http://172.16.30.85/1/high
+      state: http://172.16.30.85/1
+      map:
+        low: on
+        high: off
+      active: true
 receive:
   active: true
   multiple: false
   switchable: true
   endpoint:
-    'Roof Switch':
+    'QRM':
+      info: 'Inside QRM'
       on: 
       - http://172.16.30.75/1/low
       off: 
@@ -25,7 +75,8 @@ receive:
         low: on
         high: off
       active: true
-    'HexxBeam':
+    'Compact':
+      info: 'Compactenna'
       on: 
       - http://172.16.30.75/2/low
       off: 
@@ -35,7 +86,8 @@ receive:
         low: on
         high: off
       active: true
-    'Active Loop N-S':
+    'BigLoop':
+      info: 'Active Magnetic Loop 5M (Bonito)'
       on: 
       - http://172.16.30.75/3/low
       off: 
@@ -45,7 +97,8 @@ receive:
         low: on
         high: off
       active: true
-    'Active Loop E-W':
+    'Whip':
+      info: 'Active Whip'
       on: 
       - http://172.16.30.75/4/low
       off: 
@@ -55,7 +108,8 @@ receive:
         low: on
         high: off
       active: true
-    'Active Dipole':
+    'LoopEW':
+      info: 'Bonito Loop'
       on: 
       - http://172.16.30.75/5/low
       off: 
@@ -65,7 +119,8 @@ receive:
         low: on
         high: off
       active: true
-    'Active Whip':
+    'LoopNS':
+      info: 'WellBrook Loop'
       on: 
       - http://172.16.30.75/6/low
       off: 
@@ -136,7 +191,7 @@ equipment:
   multiple: true
   switchable: true
   endpoint:
-    'FlexRadio 6400':
+    'FlexRadio':
       on: 
       - http://172.16.30.75/8/low
       off: 
@@ -146,12 +201,45 @@ equipment:
         low: on
         high: off
       active: true
-    'Disconnect HF Transmit Antennas':
+    'TXHFAntennas':
       on: 
       - http://172.16.30.75/7/low
       off: 
       - http://172.16.30.75/7/high
       state: http://172.16.30.75/7
+      map:
+        low: on
+        high: off
+      active: true
+    'X700H':
+      info: 'X700H antenna relay'
+      on: 
+      - http://172.16.30.85/6/high
+      off: 
+      - http://172.16.30.85/6/low
+      state: http://172.16.30.85/6
+      map:
+        low: off
+        high: on
+      active: true
+    'X700H-PreAmp':
+      info: 'X700H PreAmp'
+      on: 
+      - http://172.16.30.85/7/low
+      off: 
+      - http://172.16.30.85/7/high
+      state: http://172.16.30.85/7
+      map:
+        low: on
+        high: off
+      active: true
+    'Lights':
+      info: 'Led Lightning RF Room'
+      on: 
+      - http://172.16.30.85/5/low
+      off: 
+      - http://172.16.30.85/5/high
+      state: http://172.16.30.85/5
       map:
         low: on
         high: off

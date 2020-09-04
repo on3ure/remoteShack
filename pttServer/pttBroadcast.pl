@@ -24,12 +24,18 @@ foreach my $broadcastName ( keys %{ $config->{pttBroadcast} } ) {
         my $currentstate = 'off';
 
         while (1) {
-            my $res
-                = $ua->get(
-                $config->{pttBroadcast}->{$broadcastName}->{state} )
-                ->result->json;
-            if ( $config->{pttBroadcast}->{$broadcastName}->{map}
-                ->{ $res->{state} } ne $currentstate )
+            my $res;
+            eval {
+                $res
+                    = $ua->get(
+                    $config->{pttBroadcast}->{$broadcastName}->{state} )
+                    ->result->json;
+            };
+            if ($@) {
+                warn $@;
+                sleep 5;
+            }
+            if ( $config->{pttBroadcast}->{$broadcastName}->{map}->{ $res->{state} } ne $currentstate )
             {
                 if ( $config->{pttBroadcast}->{$broadcastName}->{map}
                     ->{ $res->{state} } eq 'off' )
@@ -41,10 +47,16 @@ foreach my $broadcastName ( keys %{ $config->{pttBroadcast} } ) {
                         }
                         )
                     {
-                        $ua->get(
-                            $config->{pttBroadcast}->{$broadcastName}
-                                ->{broadcast}->{$broadcastTarget}->{off} )
-                            ->result->json;
+                        eval {
+                            $ua->get(
+                                $config->{pttBroadcast}->{$broadcastName}
+                                    ->{broadcast}->{$broadcastTarget}->{off} )
+                                ->result->json;
+                        };
+                        if ($@) {
+                            warn $@;
+                            sleep 5;
+                        }
                     }
                 }
                 if ( $config->{pttBroadcast}->{$broadcastName}->{map}
@@ -57,10 +69,16 @@ foreach my $broadcastName ( keys %{ $config->{pttBroadcast} } ) {
                         }
                         )
                     {
-                        $ua->get(
-                            $config->{pttBroadcast}->{$broadcastName}
-                                ->{broadcast}->{$broadcastTarget}->{on} )
-                            ->result->json;
+                        eval {
+                            $ua->get(
+                                $config->{pttBroadcast}->{$broadcastName}
+                                    ->{broadcast}->{$broadcastTarget}->{on} )
+                                ->result->json;
+                        };
+                        if ($@) {
+                            warn $@;
+                            sleep 5;
+                        }
                     }
                 }
                 else {
