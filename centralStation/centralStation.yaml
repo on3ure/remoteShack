@@ -37,17 +37,6 @@ transmit:
         low: on
         high: off
       active: true
-    'IsoTron':
-      info: '20m 15m 10m'
-      on: 
-      - http://172.16.30.85/2/low
-      off: 
-      - http://172.16.30.85/2/high
-      state: http://172.16.30.85/2
-      map:
-        low: on
-        high: off
-      active: true
     'Dummy':
       info: 'Dummy Load 500W'
       on: 
@@ -71,17 +60,6 @@ receive:
       off: 
       - http://172.16.30.75/1/high
       state: http://172.16.30.75/1
-      map:
-        low: on
-        high: off
-      active: true
-    'Compact':
-      info: 'Compactenna'
-      on: 
-      - http://172.16.30.75/2/low
-      off: 
-      - http://172.16.30.75/2/high
-      state: http://172.16.30.75/2
       map:
         low: on
         high: off

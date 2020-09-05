@@ -195,8 +195,7 @@ get '/:category/:endpoint/:switch' => sub {
                 foreach my $endpoint (
                     keys %{ $config->{$category}->{endpoint} } )
                 {
-                    if ( $config->{$category}->{endpoint}->{$endpoint}
-                        ->{active} eq 'true' )
+                    if ( defined $config->{$category}->{endpoint}->{$endpoint}->{active} && ($config->{$category}->{endpoint}->{$endpoint}->{active} eq 'true') )
                     {
 
                         my $res
@@ -238,8 +237,9 @@ get '/:category/:endpoint/:switch' => sub {
                 foreach my $endpoint (
                     keys %{ $config->{$category}->{endpoint} } )
                 {
-                    if ( $config->{$category}->{endpoint}->{$endpoint}
-                        ->{active} eq 'true' )
+                    if ( defined $config->{$category}->{endpoint}->{$endpoint}->{active} &&
+                    ($config->{$category}->{endpoint}->{$endpoint}
+                        ->{active} eq 'true' ))
                     {
                         my $res
                             = $ua->get(
@@ -260,8 +260,9 @@ get '/:category/:endpoint/:switch' => sub {
             foreach
                 my $endpoint ( keys %{ $config->{$category}->{endpoint} } )
             {
-                if ( $config->{$category}->{endpoint}->{$endpoint}->{active}
-                    eq 'true' )
+                if ( defined $config->{$category}->{endpoint}->{$endpoint}->{active} &&
+                ($config->{$category}->{endpoint}->{$endpoint}->{active}
+                    eq 'true' ))
                 {
                     my $res
                         = $ua->get(
