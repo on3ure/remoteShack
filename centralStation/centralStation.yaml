@@ -26,8 +26,8 @@ transmit:
         low: on
         high: off
       active: true
-    'HexxBeam':
-      info: '20m 17m 15m 12m 10m'
+    'QRM':
+      info: 'Inside Above Lab QRM sensor'
       on: 
       - http://172.16.30.85/3/low
       off: 
@@ -39,6 +39,17 @@ transmit:
       active: true
     'Dummy':
       info: 'Dummy Load 500W'
+      on: 
+      - http://172.16.30.85/2/low
+      off: 
+      - http://172.16.30.85/2/high
+      state: http://172.16.30.85/2
+      map:
+        low: on
+        high: off
+      active: true
+    'Hexxbeam':
+      info: 'Heaxxbean 20 15 12 10'
       on: 
       - http://172.16.30.85/1/low
       off: 
@@ -65,7 +76,18 @@ receive:
         high: off
       active: true
     'BigLoop':
-      info: 'Active Magnetic Loop 5M (Bonito)'
+      info: 'BigLoop'
+      on: 
+      - http://172.16.30.75/2/low
+      off: 
+      - http://172.16.30.75/2/high
+      state: http://172.16.30.75/2
+      map:
+        low: on
+        high: off
+      active: true
+    'NoIdea':
+      info: 'NoIdea'
       on: 
       - http://172.16.30.75/3/low
       off: 

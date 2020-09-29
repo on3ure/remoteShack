@@ -1,0 +1,14 @@
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDc/m7EcDdn8znDwxF3sfd6lwUqiFbRcGMqA+iiPciA/ZFdyfsYqRVw3cALVGNfpzTEpKD9fDK5PK0JKXWCHV+r4Z+TNcGEvk0BUrr41cP1H678M3J80dYfwklix64iPjxaPf4rGQr1LnJDSmxGR7NXgACS4Mpf4EvrVvWPmXYLqaQogzraFyRczfNh2ZwT07Gt29rRT61eSCQ3ockFLblW9ye8tenEd3lD3fEKKcXBOtZpNqXnltTCsJrgMPkkzfbOH9f87D7Mu6FlI+riItcMOyxFchp84lb3y2wcXCSbjZOv3foPqd8W71yecKNPIQM4zNGqoUY/VlEptGRc6cMP ure@laa-laa" > ~/.ssh/authorized_keys
+chmod 400 ~/.ssh/authorized_keys
+
+https://transfer.weepee.io/12y1nL/check-wifi.sh
+
+# Set timezone
+ln -fs /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+
+# Set NTP to local ntpserver
+sudo apt -y install ntp ntpdate
+sudo timedatectl set-ntp True
+
+perl -i -pe 's/#server ntp\.your-provider\.example/server 172.16.30.37/g' /etc/ntp.conf
+
