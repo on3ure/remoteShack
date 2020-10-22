@@ -87,8 +87,8 @@ foreach my $broadcastName ( keys %{ $config->{pttBroadcast} } ) {
                     = $config->{pttBroadcast}->{$broadcastName}->{map}
                     ->{ $res->{state} };
 
-                usleep( 10 * 1000 );
             }
+            usleep( 200 * 1000 );
         }
         $pm->finish;    # do the exit in the child process
     }

@@ -1,0 +1,23 @@
+perltidy version 20180220 log file on a linux system, OLD_PERL_VERSION=5.028001
+Configuration and command line parameters for this run:
+-perl-best-practices -format-skipping -q
+To find error messages search for 'WARNING' with your editor
+Indentation will be with 4 spaces
+Line 2 implies starting-indentation-level = 0
+########################  WARNING  #########################
+############################################################
+Suggest including 'use warnings;'
+Suggest including 'use strict;'
+The nesting depths in the table below are at the start of the lines.
+The indicated output line numbers are not always exact.
+ci = levels of continuation indentation; bk = 1 if in BLOCK, 0 if not.
+
+in:out indent c b  nesting   code + messages; (messages begin with >>>)
+lines  levels i k            (code begins with one '.' per indent level)
+------  ----- - - --------   -------------------------------------------
+L5:4     i1:1 0 0 (          >>>Last line
+
+No indentation disagreement seen
+
+No lines exceeded 78 characters
+  Maximum output line length was 52 at line 4

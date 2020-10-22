@@ -18,10 +18,10 @@ transmit:
     'Tarheel':
       info: '80m-20m'
       on: 
-      - http://172.16.30.85/4/low
+      - http://relay2.local/4/low
       off: 
-      - http://172.16.30.85/4/high
-      state: http://172.16.30.85/4
+      - http://relay2.local/4/high
+      state: http://relay2.local/4
       map:
         low: on
         high: off
@@ -29,10 +29,10 @@ transmit:
     'QRM':
       info: 'Inside Above Lab QRM sensor'
       on: 
-      - http://172.16.30.85/3/low
+      - http://relay2.local/3/low
       off: 
-      - http://172.16.30.85/3/high
-      state: http://172.16.30.85/3
+      - http://relay2.local/3/high
+      state: http://relay2.local/3
       map:
         low: on
         high: off
@@ -40,10 +40,10 @@ transmit:
     'Dummy':
       info: 'Dummy Load 500W'
       on: 
-      - http://172.16.30.85/2/low
+      - http://relay2.local/2/low
       off: 
-      - http://172.16.30.85/2/high
-      state: http://172.16.30.85/2
+      - http://relay2.local/2/high
+      state: http://relay2.local/2
       map:
         low: on
         high: off
@@ -51,10 +51,10 @@ transmit:
     'Hexxbeam':
       info: 'Heaxxbean 20 15 12 10'
       on: 
-      - http://172.16.30.85/1/low
+      - http://relay2.local/1/low
       off: 
-      - http://172.16.30.85/1/high
-      state: http://172.16.30.85/1
+      - http://relay2.local/1/high
+      state: http://relay2.local/1
       map:
         low: on
         high: off
@@ -67,10 +67,10 @@ receive:
     'QRM':
       info: 'Inside QRM'
       on: 
-      - http://172.16.30.75/1/low
+      - http://relay1.local/3/low
       off: 
-      - http://172.16.30.75/1/high
-      state: http://172.16.30.75/1
+      - http://relay1.local/3/high
+      state: http://relay1.local/3
       map:
         low: on
         high: off
@@ -78,21 +78,21 @@ receive:
     'BigLoop':
       info: 'BigLoop'
       on: 
-      - http://172.16.30.75/2/low
+      - http://relay1.local/2/low
       off: 
-      - http://172.16.30.75/2/high
-      state: http://172.16.30.75/2
+      - http://relay1.local/2/high
+      state: http://relay1.local/2
       map:
         low: on
         high: off
       active: true
-    'NoIdea':
-      info: 'NoIdea'
+    'Compactenna':
+      info: 'Compactenna'
       on: 
-      - http://172.16.30.75/3/low
+      - http://relay1.local/1/low
       off: 
-      - http://172.16.30.75/3/high
-      state: http://172.16.30.75/3
+      - http://relay1.local/1/high
+      state: http://relay1.local/1
       map:
         low: on
         high: off
@@ -100,21 +100,10 @@ receive:
     'Whip':
       info: 'Active Whip'
       on: 
-      - http://172.16.30.75/4/low
+      - http://relay1.local/4/low
       off: 
-      - http://172.16.30.75/4/high
-      state: http://172.16.30.75/4
-      map:
-        low: on
-        high: off
-      active: true
-    'LoopEW':
-      info: 'Bonito Loop'
-      on: 
-      - http://172.16.30.75/5/low
-      off: 
-      - http://172.16.30.75/5/high
-      state: http://172.16.30.75/5
+      - http://relay1.local/4/high
+      state: http://relay1.local/4
       map:
         low: on
         high: off
@@ -122,10 +111,21 @@ receive:
     'LoopNS':
       info: 'WellBrook Loop'
       on: 
-      - http://172.16.30.75/6/low
+      - http://relay1.local/5/low
       off: 
-      - http://172.16.30.75/6/high
-      state: http://172.16.30.75/6
+      - http://relay1.local/5/high
+      state: http://relay1.local/5
+      map:
+        low: on
+        high: off
+      active: true
+    'LoopEW':
+      info: 'Bonito Loop'
+      on: 
+      - http://relay1.local/6/low
+      off: 
+      - http://relay1.local/6/high
+      state: http://relay1.local/6
       map:
         low: on
         high: off
@@ -138,7 +138,7 @@ ptt:
     'flexradio':
       on: 
       off: 
-      state: http://172.16.30.74/8
+      state: http://relay0.local/8
       map:
         low: on
         high: off
@@ -146,7 +146,7 @@ ptt:
     'dvmega':
       on:
       off:
-      state: http://172.16.30.76/3
+      state: http://relay3.local/3
       map:
         low: on
         high: off
@@ -158,30 +158,30 @@ ledtower:
   endpoint:
 #    'buzzer':
 #      on: 
-#      - http://172.16.30.74/2/low
+#      - http://relay0.local/2/low
 #      off: 
-#      - http://172.16.30.74/2/high
-#      state: http://172.16.30.74/2
+#      - http://relay0.local/2/high
+#      state: http://relay0.local/2
 #      map:
 #        low: on
 #        high: off
 #      active: true
     'green':
       on:
-      - http://172.16.30.74/3/low
+      - http://relay0.local/3/low
       off:
-      - http://172.16.30.74/3/high
-      state: http://172.16.30.74/3
+      - http://relay0.local/3/high
+      state: http://relay0.local/3
       map:
         low: on
         high: off
       active: true
     'orange':
       on:
-      - http://172.16.30.74/4/low
+      - http://relay0.local/4/low
       off:
-      - http://172.16.30.74/4/high
-      state: http://172.16.30.74/2
+      - http://relay0.local/4/high
+      state: http://relay0.local/2
       map:
         low: on
         high: off
@@ -193,20 +193,20 @@ equipment:
   endpoint:
     'FlexRadio':
       on: 
-      - http://172.16.30.75/8/low
+      - http://relay1.local/8/low
       off: 
-      - http://172.16.30.75/8/high
-      state: http://172.16.30.75/8
+      - http://relay1.local/8/high
+      state: http://relay1.local/8
       map:
         low: on
         high: off
       active: true
     'TXHFAntennas':
       on: 
-      - http://172.16.30.75/7/low
+      - http://relay1.local/7/low
       off: 
-      - http://172.16.30.75/7/high
-      state: http://172.16.30.75/7
+      - http://relay1.local/7/high
+      state: http://relay1.local/7
       map:
         low: on
         high: off
@@ -214,10 +214,10 @@ equipment:
     'X700H':
       info: 'X700H antenna relay'
       on: 
-      - http://172.16.30.85/6/high
+      - http://relay2.local/6/high
       off: 
-      - http://172.16.30.85/6/low
-      state: http://172.16.30.85/6
+      - http://relay2.local/6/low
+      state: http://relay2.local/6
       map:
         low: off
         high: on
@@ -225,10 +225,10 @@ equipment:
     'X700H-PreAmp':
       info: 'X700H PreAmp'
       on: 
-      - http://172.16.30.85/7/low
+      - http://relay2.local/7/low
       off: 
-      - http://172.16.30.85/7/high
-      state: http://172.16.30.85/7
+      - http://relay2.local/7/high
+      state: http://relay2.local/7
       map:
         low: on
         high: off
@@ -236,10 +236,10 @@ equipment:
     'Lights':
       info: 'Led Lightning RF Room'
       on: 
-      - http://172.16.30.85/5/low
+      - http://relay2.local/5/low
       off: 
-      - http://172.16.30.85/5/high
-      state: http://172.16.30.85/5
+      - http://relay2.local/5/high
+      state: http://relay2.local/5
       map:
         low: on
         high: off
@@ -251,10 +251,10 @@ lights:
   endpoint:
     'HF Room':
       on: 
-      - http://172.16.30.75/1/low
+      - http://relay1.local/1/low
       off: 
-      - http://172.16.30.75/1/high
-      state: http://172.16.30.75/1
+      - http://relay1.local/1/high
+      state: http://relay1.local/1
       map:
         low: on
         high: off
@@ -266,24 +266,28 @@ transverters:
   endpoint:
     '2m':
       on: 
-      - http://172.16.30.74/6/high
-      - http://172.16.30.74/7/high
+      - http://relay0.local/7/high
+      - http://relay0.local/6/high
+      - http://relay2.local/8/high
       off: 
-      - http://172.16.30.74/6/low
-      - http://172.16.30.74/7/low
-      state: http://172.16.30.74/6
+      - http://relay0.local/7/low
+      - http://relay0.local/6/low
+      - http://relay2.local/8/log
+      state: http://relay0.local/7
       map:
         low: off
         high: on
       active: true
     '70cm':
       on: 
-      - http://172.16.30.74/6/low
-      - http://172.16.30.74/7/low
+      - http://relay0.local/6/low
+      - http://relay0.local/7/low
+      - http://relay2.local/8/low
       off: 
-      - http://172.16.30.74/6/high
-      - http://172.16.30.74/7/high
-      state: http://172.16.30.74/6
+      - http://relay0.local/6/high
+      - http://relay0.local/7/high
+      - http://relay2.local/8/high
+      state: http://relay0.local/6
       map:
         low: on
         high: off
