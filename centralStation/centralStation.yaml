@@ -266,14 +266,12 @@ transverters:
   endpoint:
     '2m':
       on: 
-      - http://relay0.local/7/high
       - http://relay0.local/6/high
       - http://relay2.local/8/high
       off: 
-      - http://relay0.local/7/low
       - http://relay0.local/6/low
       - http://relay2.local/8/log
-      state: http://relay0.local/7
+      state: http://relay0.local/6
       map:
         low: off
         high: on
@@ -281,13 +279,11 @@ transverters:
     '70cm':
       on: 
       - http://relay0.local/6/low
-      - http://relay0.local/7/low
       - http://relay2.local/8/low
       off: 
       - http://relay0.local/6/high
-      - http://relay0.local/7/high
       - http://relay2.local/8/high
-      state: http://relay0.local/6
+      state: http://relay0.local/8
       map:
         low: on
         high: off
